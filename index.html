@@ -1,12 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Educational Work</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<button type="button" onclick="alert('Hello world!')">Click Me!</button>
- 
+    <main class="content-wrapper">
+        <div class="card">
+            <h1>Educational Resource</h1>
+            <p>Click the button below to load and view your interactive learning website directly on this page.</p>
+            <button id="toggleButton" type="button">Open Website</button>
+        </div>
+
+        <div id="iframeContainer" class="iframe-container hidden">
+            <iframe id="resourceFrame" src="https://example.com" title="Educational Resource Website"></iframe>
+        </div>
+    </main>
+
+    <script>
+        const toggleButton = document.getElementById('toggleButton');
+        const iframeContainer = document.getElementById('iframeContainer');
+
+        toggleButton.addEventListener('click', function() {
+            iframeContainer.classList.toggle('hidden');
+            
+            if (iframeContainer.classList.contains('hidden')) {
+                toggleButton.textContent = 'Open Website';
+            } else {
+                toggleButton.textContent = 'Close Website';
+            }
+        });
+    </script>
 </body>
 </html>
