@@ -1,2 +1,2 @@
 # educational-work
-Learn stuff in school
+this isn't a games site trust me
