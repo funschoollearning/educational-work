@@ -1,23 +1,26 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Bloons</title>
-    <script src="https://cdn.statically.io/gh/ruffle-rs/ruffle@master/web/packages/selfhosted/js/ruffle.js"></script>
-</head>
-<body>
+    <head>
+        <meta charset='utf8'>
+    </head>
+    <body>
+        <div id='ruffle'></div>
+        <script src='https://cdn.statically.io/gh/ruffle-rs/ruffle@master/web/packages/selfhosted/js/ruffle.js'></script>
+        <script>
+var swfobject = {};
 
-    <div id="game-container" style="width: 1200px; height: 900px;"></div>
-
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            const container = document.getElementById("game-container");
-            container.appendChild(player);
-            player.load("https://cdn.statically.io/gh/funschoollearning/educational-work@main/Assets/bloons.swf");
+swfobject.embedSWF = function(url, cont, width, height){
+    var ruffle = window.RufflePlayer.newest(),
+        player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+            width: width,
+            height: height,
+            style: 'width: ' + width + 'px; height: ' + height + 'px',
         });
-    </script>
+    
+    player.load({ url: url });
+}
 
-</body>
+swfobject.embedSWF('https://cdn.statically.io/gh/funschoollearning/educational-work@main/Assets/bloons.swf', 'ruffle', 500, 500);
+        </script>
+    </body>
 </html>
