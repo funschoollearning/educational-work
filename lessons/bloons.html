@@ -25,7 +25,7 @@
   </head>
   <body>
     <div id="player"></div>
-    <script src="https://unpkg.com"></script>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle@0.2.0/ruffle.js"></script>
     <script>
       window.RufflePlayer = window.RufflePlayer || {};
       window.RufflePlayer.config = {
@@ -39,7 +39,7 @@
         const container = document.getElementById("player");
         if (container) {
           container.appendChild(player);
-          player.load({ url: "assets/bloons.swf" });
+          player.load({ url: "../assets/bloons.swf" });
         }
       });
     </script>
