@@ -6,24 +6,20 @@
     <style>
       html, body {
         width: 100%;
-        /* FIXED: Uses dynamic viewport height to account for mobile browser address bars */
         height: 100svh;
         margin: 0;
         padding: 0;
         overflow: hidden;
         background: #000;
-        /* FIXED: Grid layout provides cleaner scaling and centering boundaries */
         display: grid;
         place-items: start center;
       }
       #player {
-        /* FIXED: Dynamically scales based on the container aspect ratio (4:3) */
         width: min(100svw, 133.33svh);
         height: min(75svw, 100svh);
         max-width: 133.33svh;
         max-height: 100svh;
       }
-      /* FIXED: Ensures Ruffle canvas expands properly inside our flex container */
       #player rfl-player, #player canvas {
         width: 100% !important;
         height: 100% !important;
@@ -32,7 +28,7 @@
   </head>
   <body>
     <div id="player"></div>
-    <script src="https://unpkg.com"></script>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle/ruffle.js"></script>
     <script>
       window.RufflePlayer = window.RufflePlayer || {};
       window.RufflePlayer.config = {
