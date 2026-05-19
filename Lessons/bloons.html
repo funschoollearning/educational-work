@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Bloons</title>
-    <script src="https://cdn.statically.io/gh/ruffle-rs/ruffle@master/web/packages/selfhosted/js/ruffle.js"></script>
+    <script src="https://statically.io"></script>
 </head>
 <body>
-    <embed src="https://cdn.statically.io/gh/funschoollearning/educational-work@main/Assets/bloons.swf" width="1200" height="900">
+
+    <div id="game-container" style="width: 1200px; height: 900px;"></div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("game-container");
+            container.appendChild(player);
+            player.load("https://statically.io");
+        });
+    </script>
+
 </body>
 </html>
