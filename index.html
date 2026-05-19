@@ -1,38 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educational Work</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<meta charset="UTF-8">
+<title>Educational Work</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:sans-serif;background-color:#2b2c2e;background-image:linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 0),linear-gradient(rgba(255,255,255,0.03) 1px,transparent 0),linear-gradient(90deg,rgba(0,0,0,0.12) 2px,transparent 0),linear-gradient(rgba(0,0,0,0.12) 2px,transparent 0),radial-gradient(rgba(255,255,255,0.05) 1px,transparent 0);background-size:4px 4px,4px 4px,12px 12px,12px 12px,2px 2px;box-shadow:inset 0 0 100px rgba(0,0,0,0.4);min-height:100vh;padding-bottom:40px;overflow-x:hidden;user-select:none}
+.top-banner{width:100%;background:linear-gradient(to bottom,#7da2ce 0%,#4b7bb1 50%,#36659c 50.1%,#244b7a 100%);padding:12px 20px;position:sticky;top:0;z-index:1000;border-bottom:2px solid #142a44;box-shadow:0 5px 12px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.4)}
+.banner-content{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.top-banner h1{font-size:1.6rem;font-weight:bold;color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,0.6);letter-spacing:-0.5px}
+.search-container{flex-grow:1;max-width:500px;position:relative}
+#appSearch{width:100%;padding:8px 14px 8px 36px;font-size:0.95rem;border-radius:20px;border:1px solid #1a3554;outline:none;background:#fff;box-shadow:inset 0 2px 5px rgba(0,0,0,0.35),0 1px 0 rgba(255,255,255,0.2)}
+.search-container::before{content:"🔍︎";position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:0.95rem;color:#666;pointer-events:none}
+.ios-springboard{width:100%;max-width:1000px;margin:0 auto;padding:40px 20px 0}
+.icon-grid{display:flex;flex-wrap:wrap;gap:45px;justify-content:center}
+.app-item{display:flex;flex-direction:column;align-items:center;cursor:pointer;width:110px;transform-origin:center center;transition:transform .15s linear,opacity .15s linear;vertical-align:top;outline:none}
+.app-item.filtered-out{opacity:0.15!important;transform:scale(0.60)!important}
+.app-item.pressed-state{transform:scale(0.75)!important;transition:transform .15s linear}
+.app-item.pressed-state .app-icon{filter:brightness(0.65)}
+.app-icon{width:100%;aspect-ratio:1;border-radius:22%;position:relative;overflow:hidden;border:1px solid rgba(0,0,0,0.7);box-shadow:inset 0 1px 2px rgba(255,255,255,0.5),inset 0 -1px 2px rgba(0,0,0,0.3),0 8px 16px rgba(0,0,0,0.65),0 2px 4px rgba(0,0,0,0.4)}
+.app-icon img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none}
+.icon-gloss{position:absolute;top:0;left:-50%;width:200%;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.06) 100%);border-radius:0 0 100% 100%;pointer-events:none;z-index:10}
+.app-label{margin-top:10px;font-size:0.95rem;font-weight:bold;color:#fff;text-shadow:0 1px 2px #000,0 2px 4px rgba(0,0,0,0.8);text-align:center;width:100%;line-height:1.25;min-height:2.5rem}
+</style>
 
-    <main class="content-wrapper">
-        <div class="card">
-            <h1>Educational Resource</h1>
-            <p>Click the button below to load and view your interactive learning website directly on this page.</p>
-            <button id="toggleButton" type="button">Open Website</button>
+
+<header class="top-banner">
+    <div class="banner-content">
+        <h1>Educational Work</h1>
+        <div class="search-container">
+            <input type="text" id="appSearch" placeholder="Search..." autocomplete="off">
         </div>
+    </div>
+</header>
+<main class="ios-springboard">
+    <div class="icon-grid" id="iconGrid">
+        
+    <div class="app-item" data-title="Placeholder" data-url="https://github.com">
+            <div class="app-icon"><img src="https://placehold.co/400"><div class="icon-gloss"></div></div>
+            <span class="app-label">Placeholder</span>
+        </div></div>
+</main>
+<script>
+const g = document.getElementById('iconGrid'),
+      items = Array.from(document.querySelectorAll('.app-item')),
+      s = document.getElementById('appSearch');
 
-        <div id="iframeContainer" class="iframe-container hidden">
-            <iframe id="resourceFrame" src="https://example.com" title="Educational Resource Website"></iframe>
-        </div>
-    </main>
+items.sort((a,b) => a.querySelector('.app-label').textContent.trim().localeCompare(b.querySelector('.app-label').textContent.trim())).forEach(i => g.appendChild(i));
 
-    <script>
-        const toggleButton = document.getElementById('toggleButton');
-        const iframeContainer = document.getElementById('iframeContainer');
-
-        toggleButton.addEventListener('click', function() {
-            iframeContainer.classList.toggle('hidden');
-            
-            if (iframeContainer.classList.contains('hidden')) {
-                toggleButton.textContent = 'Open Website';
-            } else {
-                toggleButton.textContent = 'Close Website';
+items.forEach(i => {
+    i.addEventListener('click', function() {
+        if (this.classList.contains('animating')) return;
+        this.classList.add('animating', 'pressed-state');
+        
+        setTimeout(() => this.classList.remove('pressed-state'), 150);
+        setTimeout(() => {
+            const w = window.open();
+            if (w) {
+                const d = w.document;
+                d.title = this.getAttribute('data-title') || "Workspace";
+                d.body.style = "margin:0;padding:0;overflow:hidden;height:100vh;";
+                const f = d.createElement('iframe');
+                f.src = this.getAttribute('data-url');
+                f.style = "width:100%;height:100%;border:none;display:block;";
+                d.body.appendChild(f);
             }
-        });
-    </script>
+            this.classList.remove('animating');
+        }, 300);
+    });
+    i.addEventListener('contextmenu', e => e.preventDefault());
+});
+
+s.addEventListener('input', function() {
+    const q = this.value.toLowerCase().trim();
+    items.forEach(i => {
+        const l = i.querySelector('.app-label').textContent.toLowerCase(),
+              t = i.getAttribute('data-title').toLowerCase();
+        i.classList.toggle('filtered-out', !l.includes(q) && !t.includes(q));
+    });
+});
+</script>
 </body>
 </html>
