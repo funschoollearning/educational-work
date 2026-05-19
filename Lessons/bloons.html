@@ -14,10 +14,8 @@
         align-items: flex-start;
       }
       #player {
-        width: 100vw;
-        height: 75vw; 
-        max-height: 100vh;
-        max-width: 133.33vh; 
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
@@ -28,7 +26,7 @@
       window.addEventListener("load", () => {
         const player = window.RufflePlayer.newest().createPlayer();
         document.getElementById("player").appendChild(player);
-        player.load("..assets/bloons.swf");
+        player.load("../assets/bloons.swf");
       });
     </script>
   </body>
