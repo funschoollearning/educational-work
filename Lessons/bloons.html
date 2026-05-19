@@ -1,11 +1,19 @@
 <html>
   <head>
     <title>Bloons</title>
+    <style>
+      html, body, #player { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #000; }
+    </style>
   </head>
   <body>
-    <div style="text-align: center;">
-    <embed src="assets/bloons.swf" width="100%" height="100%">
-    </div>
+    <div id="player"></div>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script>
+      window.addEventListener("load", () => {
+        const player = window.RufflePlayer.newest().createPlayer();
+        document.getElementById("player").appendChild(player);
+        player.load("assets/bloons.swf");
+      });
+    </script>
   </body>
 </html>
