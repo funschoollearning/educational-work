@@ -16,6 +16,8 @@
 
     <div id="container"></div>
 
+    <script src="../assets/ruffle/ruffle.js"></script>
+
     <script>
         window.RufflePlayer = window.RufflePlayer || {};
         window.RufflePlayer.config = {
@@ -24,11 +26,7 @@
             "unmuteOverlay": "hidden",
             "quality": "medium" 
         };
-    </script>
 
-    <script src="../assets/ruffle.js"></script>
-
-    <script>
         window.addEventListener("DOMContentLoaded", () => {
             const ruffle = window.RufflePlayer.newest();
             const player = ruffle.createPlayer();
